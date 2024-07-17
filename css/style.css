@@ -206,30 +206,39 @@ main {
     color: #e8b80b;
 }
 
-.selection-input-language-list {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
+.selection-input-language-list,
 .selection-output-language-list {
     position: absolute;
     top: 0;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, .15);
+    background-color: var(--var-header-bg);
+    overflow: hidden;
+}
+
+.selection-input-language-list {
+    left: 0;
+    z-index: 1000;
+    transform: translate(10px, 41px);
+}
+
+.selection-output-language-list {
     right: 0;
     z-index: 1001;
+    transform: translate(-10px, 41px);
 }
 
 .selection-input-language-list li,
 .selection-output-language-list li {
-    padding-right: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 10px 0 3px;
     height: 30px;
     font-size: 16px;
     font-weight: 100;
+    color: var(--var-translator-fc);
     background-color: var(--var-header-bg);
-    border-right: 1px solid rgba(0, 0, 0, .15);
-    border-left: 1px solid rgba(0, 0, 0, .15);
-    /*transform: translateY();*/
 }
 
 .translator-fields textarea {
