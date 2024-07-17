@@ -1,11 +1,13 @@
 /* Переменные для смены темы */
 :root {
-    --var-body-bg: ;
+    --var-body-bg: #f1f6f9;
     --var-body-fc: ;
+    --var-header-bg: #ffffff;
+    --var-header-b: #dee4e7;
 }
 
 .dark {
-    --var-body-bg: ;
+    --var-body-bg: #143447;
     --var-body-fc: ;
 }
 
@@ -57,7 +59,7 @@ body {
     font-family: "Consolas", serif;
     font-weight: 400;
     font-style: normal;
-    background: #F5F3F4;
+    background: var(--var-body-bg);
 }
 
 input::-ms-clear {
@@ -101,13 +103,64 @@ h6 {
 }
 
 /* Заголовок */
+.header {
+    background-color: var(--var-header-bg);
+    border-bottom: 1px solid var(--var-header-b);
+}
+
 .header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0 auto;
     max-width: 1280px;
     width: auto;
+    padding: 10px 10px;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 5px
+}
+
+.header-logo img {
+    width: 42px;
+    height: 42px;
+}
+
+.header-logo p {
+    font-size: 18px;
+    color: #e10455;
+    font-weight: 700;
+}
+
+.header-site-theme img {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    transition: transform .5s linear;
+}
+
+/* Анимация кнопки смены темы */
+.header-site-theme img:hover {
+    transform: translateY(20%);
+}
+
+.header-site-theme button {
+    background: transparent;
+}
+
+.site-theme-light {
+    display: none;
 }
 
 /* Контент часть */
 main {
     flex: 1 1 auto;
+}
+
+/* Форма перевода текста */
+.translator-fields textarea {
+    resize: none;
 }

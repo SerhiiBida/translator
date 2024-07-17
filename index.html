@@ -12,23 +12,48 @@
 <body>
 <header class="header">
     <div class="header-wrapper">
-        <div class="header-logo">
+        <a href="index.html" class="header-logo">
             <img src="img/translator-logo.png" alt="translator-logo">
             <p>
                 Translator
             </p>
-        </div>
+        </a>
         <div class="header-site-theme">
-
+            <button class="site-theme-dark">
+                <img src="img/moon-32x32.png" alt="moon">
+            </button>
+            <button class="site-theme-light">
+                <img src="img/sun-32x32.png" alt="sun">
+            </button>
         </div>
     </div>
 </header>
 <main class="main">
-
+    <section class="translator">
+        <div class="translator-wrapper">
+            <div class="translator-selection">
+            </div>
+            <div class="translator-fields">
+                <div class="translator-input">
+                    <textarea name="translator-input" id="translator-input" cols="30" rows="10"></textarea>
+                    <div class="translator-input-info"></div>
+                </div>
+                <div class="translator-output">
+                    <textarea name="translator-output" id="translator-output" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 <footer>
     <p>
         Сайт использует Cookie
+    </p>
+    <p>
+        Icons
+        <a href="https://www.flaticon.com/">
+            flaticon.com
+        </a>
     </p>
 </footer>
 <script src="js/main.js"></script>
