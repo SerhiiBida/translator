@@ -1,9 +1,9 @@
 /* Переменные для смены темы */
 :root {
     --var-body-bg: #f1f6f9;
-    --var-body-fc: ;
     --var-header-bg: #ffffff;
-    --var-header-b: #dee4e7;
+    --var-header-bd: #dee4e7;
+    --var-translator-fc: #222c31;
 }
 
 .dark {
@@ -105,7 +105,7 @@ h6 {
 /* Заголовок */
 .header {
     background-color: var(--var-header-bg);
-    border-bottom: 1px solid var(--var-header-b);
+    border-bottom: 1px solid var(--var-header-bd);
 }
 
 .header-wrapper {
@@ -125,8 +125,8 @@ h6 {
 }
 
 .header-logo img {
-    width: 42px;
-    height: 42px;
+    width: 36px;
+    height: 36px;
 }
 
 .header-logo p {
@@ -161,6 +161,83 @@ main {
 }
 
 /* Форма перевода текста */
+.translator {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: auto;
+}
+
+.translator-selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4%;
+    height: 50px;
+    background-color: var(--var-header-bg);
+    border-bottom: 1px solid var(--var-header-bd);
+}
+
+.translator-selection button {
+    background: transparent;
+}
+
+.selection-input-language-wrapper,
+.selection-output-language-wrapper {
+    position: relative;
+}
+
+.selection-input-language,
+.selection-output-language {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.selection-input-language {
+    color: #fd3a69;
+}
+
+.selection-output-language {
+    color: #e8b80b;
+}
+
+.selection-input-language-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.selection-output-language-list {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+}
+
+.selection-input-language-list li,
+.selection-output-language-list li {
+    padding-right: 20px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 100;
+    background-color: var(--var-header-bg);
+    border-right: 1px solid rgba(0, 0, 0, .15);
+    border-left: 1px solid rgba(0, 0, 0, .15);
+    /*transform: translateY();*/
+}
+
 .translator-fields textarea {
+    overflow: hidden;
     resize: none;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 24px;
+    color: var(--var-translator-fc);
 }
