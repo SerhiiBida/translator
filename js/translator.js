@@ -1,4 +1,4 @@
-// Loading supported languages
+// Supported languages
 const languages = [
     {name: "Англійська", code: "en"},
     {name: "Арабська", code: "ar"},
@@ -27,16 +27,25 @@ const languages = [
 let inputLanguageIndex = 0;
 let outputLanguageIndex = languages.length - 1;
 
+
+// Default languages on buttons
+const inputLanguageButton = document.querySelector(".selection-input-language");
+const outputLanguageButton = document.querySelector(".selection-output-language");
+
 const defaultLanguagesButtons = () => {
-    const inputLanguage = document.querySelector(".selection-input-language");
-    const outputLanguage = document.querySelector(".selection-output-language");
+    inputLanguageButton.textContent = languages[inputLanguageIndex].name;
+    outputLanguageButton.textContent = languages[outputLanguageIndex].name;
 
-    inputLanguage.textContent = languages[inputLanguageIndex].name;
-    outputLanguage.textContent = languages[outputLanguageIndex].name;
-
-    inputLanguage.setAttribute("data-code-country", languages[inputLanguageIndex].code);
-    outputLanguage.setAttribute("data-code-country", languages[outputLanguageIndex].code);
+    inputLanguageButton.setAttribute("data-code-country", languages[inputLanguageIndex].code);
+    outputLanguageButton.setAttribute("data-code-country", languages[outputLanguageIndex].code);
 }
+
+document.addEventListener("DOMContentLoaded", defaultLanguagesButtons);
+
+
+// Default languages lists
+const inputLanguagesList = document.querySelector(".selection-input-language-list");
+const outputLanguagesList = document.querySelector(".selection-output-language-list");
 
 const creatingListItems = (list, activeLanguageIndex) => {
     for (let i = 0; i < languages.length; i++) {
@@ -54,17 +63,44 @@ const creatingListItems = (list, activeLanguageIndex) => {
 }
 
 const defaultLanguagesLists = () => {
-    const inputLanguagesList = document.querySelector(".selection-input-language-list");
-    const outputLanguagesList = document.querySelector(".selection-output-language-list");
-
     creatingListItems(inputLanguagesList, inputLanguageIndex);
     creatingListItems(outputLanguagesList, outputLanguageIndex);
 }
 
-document.addEventListener("DOMContentLoaded", defaultLanguagesButtons);
 document.addEventListener("DOMContentLoaded", defaultLanguagesLists);
 
+
 // Dropdown list
+const showListLanguages = (event) => {
+    const button = event.target;
+
+    if (button.classList.contains("selection-input-language")) {
+        inputLanguagesList.classList.toggle("show-list");
+        outputLanguagesList.classList.remove("show-list");
+        return;
+    }
+
+    outputLanguagesList.classList.toggle("show-list");
+    inputLanguagesList.classList.remove("show-list");
+}
+
+const closeListLanguages = (event) => {
+    const element = event.target;
+
+    if (inputLanguageButton !== element || inputLanguagesList !== element) {
+        console.log(event.target)
+        inputLanguagesList.classList.remove("show-list");
+    }
+
+    if (outputLanguageButton !== element || outputLanguagesList !== element) {
+        outputLanguagesList.classList.remove("show-list");
+    }
+}
+
+inputLanguageButton.addEventListener("click", showListLanguages);
+outputLanguageButton.addEventListener("click", showListLanguages);
+
+document.addEventListener("click", closeListLanguages);
 
 
 // Dynamic textarea
