@@ -186,69 +186,24 @@ main {
     position: relative;
 }
 
-.selection-input-language,
-.selection-output-language {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    padding: 0 10px;
-    border-radius: 8px;
-    font-size: 17px;
-    font-weight: 700;
-}
-
-.selection-input-language:hover,
-.selection-output-language:hover {
-    background-color: var(--var-active-button);
-}
-
-.selection-input-language {
-    color: #fd3a69;
-}
-
-.selection-output-language {
-    color: #e8b80b;
-}
-
 .selection-input-language-list,
 .selection-output-language-list {
-    display: none;
-    position: absolute;
-    top: 0;
+    font-size: 16px;
     border-radius: 6px;
-    border: 1px solid rgba(0, 0, 0, .15);
     background-color: var(--var-header-bg);
-    overflow: hidden;
 }
 
-.selection-input-language-list {
-    left: -10px;
-    z-index: 1000;
-    transform: translate(10px, 41px);
-}
-
-.selection-output-language-list {
-    right: -10px;
-    z-index: 1001;
-    transform: translate(-10px, 41px);
-}
-
-.selection-input-language-list li,
-.selection-output-language-list li {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    padding: 0 10px 0 3px;
-    height: 30px;
+.selection-input-language-list option,
+.selection-output-language-list option {
     font-size: 16px;
     font-weight: 100;
     color: var(--var-translator-fc);
     background-color: var(--var-header-bg);
 }
 
-.show-list {
-    display: block;
+.selection-input-language-list:hover,
+.selection-output-language-list:hover {
+    background-color: var(--var-active-button);
 }
 
 .translator-fields textarea {
