@@ -28,26 +28,43 @@ let inputLanguageIndex = 0;
 let outputLanguageIndex = languages.length - 1;
 
 const defaultLanguagesButtons = () => {
-    const inputLanguageSelection = document.querySelector(".selection-input-language-wrapper");
-    const outputLanguageSelection = document.querySelector(".selection-output-language-wrapper");
-
-    const inputLanguage = document.createElement("button");
-    const outputLanguage = document.createElement("button");
-
-    inputLanguage.classList.add("selection-input-language");
-    outputLanguage.classList.add("selection-output-language");
+    const inputLanguage = document.querySelector(".selection-input-language");
+    const outputLanguage = document.querySelector(".selection-output-language");
 
     inputLanguage.textContent = languages[inputLanguageIndex].name;
     outputLanguage.textContent = languages[outputLanguageIndex].name;
 
     inputLanguage.setAttribute("data-code-country", languages[inputLanguageIndex].code);
     outputLanguage.setAttribute("data-code-country", languages[outputLanguageIndex].code);
+}
 
-    inputLanguageSelection.prepend(inputLanguage);
-    outputLanguageSelection.append(outputLanguage);
+const creatingListItems = (list, activeLanguageIndex) => {
+    for (let i = 0; i < languages.length; i++) {
+        if (i === activeLanguageIndex) {
+            continue;
+        }
+
+        const item = document.createElement("li");
+
+        item.textContent = languages[i].name;
+        item.setAttribute("data-code-country", languages[i].code);
+
+        list.append(item);
+    }
+}
+
+const defaultLanguagesLists = () => {
+    const inputLanguagesList = document.querySelector(".selection-input-language-list");
+    const outputLanguagesList = document.querySelector(".selection-output-language-list");
+
+    creatingListItems(inputLanguagesList, inputLanguageIndex);
+    creatingListItems(outputLanguagesList, outputLanguageIndex);
 }
 
 document.addEventListener("DOMContentLoaded", defaultLanguagesButtons);
+document.addEventListener("DOMContentLoaded", defaultLanguagesLists);
+
+// Dropdown list
 
 
 // Dynamic textarea

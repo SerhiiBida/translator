@@ -4,6 +4,7 @@
     --var-header-bg: #ffffff;
     --var-header-bd: #dee4e7;
     --var-translator-fc: #222c31;
+    --var-active-button: #f7f9f9;
 }
 
 .dark {
@@ -198,6 +199,11 @@ main {
     font-weight: 700;
 }
 
+.selection-input-language:hover,
+.selection-output-language:hover {
+    background-color: var(--var-active-button);
+}
+
 .selection-input-language {
     color: #fd3a69;
 }
@@ -208,6 +214,7 @@ main {
 
 .selection-input-language-list,
 .selection-output-language-list {
+    /*display: none;*/
     position: absolute;
     top: 0;
     border-radius: 6px;
@@ -217,13 +224,13 @@ main {
 }
 
 .selection-input-language-list {
-    left: 0;
+    left: -10px;
     z-index: 1000;
     transform: translate(10px, 41px);
 }
 
 .selection-output-language-list {
-    right: 0;
+    right: -10px;
     z-index: 1001;
     transform: translate(-10px, 41px);
 }
