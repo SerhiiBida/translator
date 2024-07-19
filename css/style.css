@@ -202,8 +202,13 @@ main {
     background-color: var(--var-header-bg);
 }
 
+.selection-swap-languages {
+    border-radius: 6px;
+}
+
 .selection-input-language-list:hover,
-.selection-output-language-list:hover {
+.selection-output-language-list:hover,
+.selection-swap-languages:hover {
     background-color: var(--var-active-button);
 }
 

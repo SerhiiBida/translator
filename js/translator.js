@@ -1,44 +1,44 @@
 // Supported languages
-const languages = [
-    {name: "Англійська", code: "en"},
-    {name: "Арабська", code: "ar"},
-    {name: "Бенгальська", code: "bn"},
-    {name: "В'єтнамська", code: "vi"},
-    {name: "Голландська", code: "nl"},
-    {name: "Грецька", code: "el"},
-    {name: "Данська", code: "da"},
-    {name: "Іспанська", code: "es"},
-    {name: "Італійська", code: "it"},
-    {name: "Китайська", code: "zh"},
-    {name: "Корейська", code: "ko"},
-    {name: "Німецька", code: "de"},
-    {name: "Норвезька", code: "no"},
-    {name: "Португальська", code: "pt"},
-    {name: "Російська", code: "ru"},
-    {name: "Суахілі", code: "sw"},
-    {name: "Турецька", code: "tr"},
-    {name: "Українська", code: "uk"},
-    {name: "Фінська", code: "fi"},
-    {name: "Французька", code: "fr"},
-    {name: "Японська", code: "ja"}
-];
+const languages = {
+    "en": "Англійська",
+    "ar": "Арабська",
+    "bn": "Бенгальська",
+    "vi": "В'єтнамська",
+    "nl": "Голландська",
+    "el": "Грецька",
+    "da": "Данська",
+    "es": "Іспанська",
+    "it": "Італійська",
+    "zh": "Китайська",
+    "ko": "Корейська",
+    "de": "Німецька",
+    "no": "Норвезька",
+    "pt": "Португальська",
+    "ru": "Російська",
+    "sw": "Суахілі",
+    "tr": "Турецька",
+    "uk": "Українська",
+    "fi": "Фінська",
+    "fr": "Французька",
+    "ja": "Японська"
+};
 
-let inputLanguageIndex = 0;
-let outputLanguageIndex = languages.length - 1;
+let inputLanguageCode = "en";
+let outputLanguageCode = "ja";
 
 
 // Default languages lists
 const inputLanguagesList = document.querySelector(".selection-input-language-list");
 const outputLanguagesList = document.querySelector(".selection-output-language-list");
 
-const creatingListItems = (list, activeLanguageIndex) => {
-    for (let i = 0; i < languages.length; i++) {
+const creatingListItems = (list, activeLanguageCode) => {
+    for (let languageCode in languages) {
         const item = document.createElement("option");
 
-        item.textContent = languages[i].name;
-        item.value = languages[i].code;
+        item.textContent = languages[languageCode];
+        item.value = languageCode;
 
-        if (i === activeLanguageIndex) {
+        if (languageCode === activeLanguageCode) {
             item.selected = true;
         }
 
@@ -47,44 +47,44 @@ const creatingListItems = (list, activeLanguageIndex) => {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    creatingListItems(inputLanguagesList, inputLanguageIndex);
-    creatingListItems(outputLanguagesList, outputLanguageIndex);
+    creatingListItems(inputLanguagesList, inputLanguageCode);
+    creatingListItems(outputLanguagesList, outputLanguageCode);
 });
 
 
 // Language selection
-const languageSelection = (event) => {
-    const item = event.target.value;
-
-    console.log(item)
-}
-
-inputLanguagesList.addEventListener("change", languageSelection);
-outputLanguagesList.addEventListener("change", languageSelection);
+inputLanguagesList.addEventListener("change", function (event) {
+    inputLanguageCode = event.target.value;
+});
+outputLanguagesList.addEventListener("change", function (event) {
+    outputLanguageCode = event.target.value;
+});
 
 
 // Swap languages
 const swapButton = document.querySelector(".selection-swap-languages");
 
-const swapLanguages = (select, oldIndex, newIndex) => {
+const swapLanguages = (select, oldCode, newCode) => {
     const list = select.querySelectorAll("option");
 
-    list.forEach((item, index) => {
-        if (index === oldIndex) {
+    list.forEach((item) => {
+        const code = item.value;
+
+        if (code === oldCode) {
             item.selected = false;
         }
 
-        if (index === newIndex) {
+        if (code === newCode) {
             item.selected = true;
         }
     });
 }
 
 swapButton.addEventListener("click", function () {
-    swapLanguages(inputLanguagesList, inputLanguageIndex, outputLanguageIndex);
-    swapLanguages(outputLanguagesList, outputLanguageIndex, inputLanguageIndex);
+    swapLanguages(inputLanguagesList, inputLanguageCode, outputLanguageCode);
+    swapLanguages(outputLanguagesList, outputLanguageCode, inputLanguageCode);
 
-    [inputLanguageIndex, outputLanguageIndex] = [outputLanguageIndex, inputLanguageIndex];
+    [inputLanguageCode, outputLanguageCode] = [outputLanguageCode, inputLanguageCode];
 });
 
 
