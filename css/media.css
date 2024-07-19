@@ -1,0 +1,33 @@
+@media (min-width: 720px) {
+    /* Форма переводчика */
+    .translator-wrapper {
+        margin-top: 25px;
+    }
+
+    .translator-selection {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .translator-fields {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .translator-input,
+    .translator-output {
+        flex-grow: 1;
+        min-height: 300px;
+        padding: 10px 25px;
+        background-color: var(--var-header-bg);
+    }
+
+    .translator-input {
+        border-bottom-left-radius: 12px;
+        border-right: 1px solid var(--var-header-bd);
+    }
+
+    .translator-output {
+        border-bottom-right-radius: 12px;
+    }
+}

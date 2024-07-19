@@ -5,6 +5,7 @@
     --var-header-bd: #dee4e7;
     --var-translator-fc: #222c31;
     --var-active-button: #f7f9f9;
+    --var-active-texarea-bd: #be0449;
 }
 
 .dark {
@@ -220,4 +221,9 @@ main {
     padding: 10px 15px;
     font-size: 24px;
     color: var(--var-translator-fc);
+}
+
+.translator-fields .translator-input:hover,
+.translator-fields .translator-output:hover {
+    border: 1px solid var(--var-active-texarea-bd);
 }
