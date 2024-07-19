@@ -2,7 +2,6 @@
 const languages = [
     {name: "Англійська", code: "en"},
     {name: "Арабська", code: "ar"},
-    {name: "Африканська", code: "af"},
     {name: "Бенгальська", code: "bn"},
     {name: "В'єтнамська", code: "vi"},
     {name: "Голландська", code: "nl"},
@@ -47,12 +46,46 @@ const creatingListItems = (list, activeLanguageIndex) => {
     }
 }
 
-const defaultLanguagesLists = () => {
+document.addEventListener("DOMContentLoaded", function () {
     creatingListItems(inputLanguagesList, inputLanguageIndex);
     creatingListItems(outputLanguagesList, outputLanguageIndex);
+});
+
+
+// Language selection
+const languageSelection = (event) => {
+    const item = event.target.value;
+
+    console.log(item)
 }
 
-document.addEventListener("DOMContentLoaded", defaultLanguagesLists);
+inputLanguagesList.addEventListener("change", languageSelection);
+outputLanguagesList.addEventListener("change", languageSelection);
+
+
+// Swap languages
+const swapButton = document.querySelector(".selection-swap-languages");
+
+const swapLanguages = (select, oldIndex, newIndex) => {
+    const list = select.querySelectorAll("option");
+
+    list.forEach((item, index) => {
+        if (index === oldIndex) {
+            item.selected = false;
+        }
+
+        if (index === newIndex) {
+            item.selected = true;
+        }
+    });
+}
+
+swapButton.addEventListener("click", function () {
+    swapLanguages(inputLanguagesList, inputLanguageIndex, outputLanguageIndex);
+    swapLanguages(outputLanguagesList, outputLanguageIndex, inputLanguageIndex);
+
+    [inputLanguageIndex, outputLanguageIndex] = [outputLanguageIndex, inputLanguageIndex];
+});
 
 
 // Dynamic textarea
