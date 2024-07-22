@@ -1,5 +1,7 @@
 'use strict'
 
+// localStorage.clear();
+
 export const addHistory = (inputText, outputText, inputLanguage, outputLanguage) => {
     let history = {
         records: []

@@ -22,7 +22,6 @@ const languages = {
     'ru': 'Російська',
     'sw': 'Суахілі',
     'tr': 'Турецька',
-    'uk': 'Українська',
     'fi': 'Фінська',
     'fr': 'Французька',
     'ja': 'Японська'
@@ -36,8 +35,12 @@ let outputLanguageCode = 'ja';
 const inputLanguagesList = document.querySelector('.selection-input-language-list');
 const outputLanguagesList = document.querySelector('.selection-output-language-list');
 
-const creatingListItems = (list, activeLanguageCode) => {
+const creatingListItems = (list, activeLanguageCode, isOutputLanguagesList = false) => {
     for (let languageCode in languages) {
+        if (isOutputLanguagesList && languageCode === 'auto') {
+            continue;
+        }
+
         const item = document.createElement('option');
 
         item.textContent = languages[languageCode];
@@ -53,23 +56,14 @@ const creatingListItems = (list, activeLanguageCode) => {
 
 document.addEventListener('DOMContentLoaded', function () {
     creatingListItems(inputLanguagesList, inputLanguageCode);
-    creatingListItems(outputLanguagesList, outputLanguageCode);
-});
-
-
-// Language selection
-inputLanguagesList.addEventListener('change', function (event) {
-    inputLanguageCode = event.target.value;
-});
-outputLanguagesList.addEventListener('change', function (event) {
-    outputLanguageCode = event.target.value;
+    creatingListItems(outputLanguagesList, outputLanguageCode, true);
 });
 
 
 // Swap languages
 const swapButton = document.querySelector(".selection-swap-languages");
 
-const swapLanguages = (select, oldCode, newCode) => {
+const changeSelectedLanguage = (select, oldCode, newCode) => {
     const list = select.querySelectorAll("option");
 
     list.forEach((item) => {
@@ -85,18 +79,60 @@ const swapLanguages = (select, oldCode, newCode) => {
     });
 }
 
-swapButton.addEventListener('click', function () {
-    swapLanguages(inputLanguagesList, inputLanguageCode, outputLanguageCode);
-    swapLanguages(outputLanguagesList, outputLanguageCode, inputLanguageCode);
+const swapLanguages = () => {
+    if (outputTextarea.value) {
+        // Swap text
+        [inputTextarea.value, outputTextarea.value] = [outputTextarea.value, inputTextarea.value];
+    }
+
+    changeSelectedLanguage(inputLanguagesList, inputLanguageCode, outputLanguageCode);
+    changeSelectedLanguage(outputLanguagesList, outputLanguageCode, inputLanguageCode);
 
     [inputLanguageCode, outputLanguageCode] = [outputLanguageCode, inputLanguageCode];
+}
+
+swapButton.addEventListener('click', function () {
+    if (inputLanguageCode === 'auto') {
+        return;
+    }
+
+    swapLanguages();
+});
+
+
+// Language selection
+inputLanguagesList.addEventListener('change', function (event) {
+    if (event.target.value === outputLanguageCode) {
+        swapLanguages();
+        return;
+    }
+
+    inputLanguageCode = event.target.value;
+
+    if (inputTextarea.value) {
+        startTranslator(0);
+    }
+});
+
+outputLanguagesList.addEventListener('change', function (event) {
+    if (event.target.value === inputLanguageCode) {
+        swapLanguages();
+        return;
+    }
+
+    outputLanguageCode = event.target.value;
+
+    if (inputTextarea.value) {
+        startTranslator(0);
+    }
 });
 
 
 // Dynamic textarea
-const textInput = document.getElementById('translator-input');
+const inputTextarea = document.getElementById('translator-input');
+const outputTextarea = document.getElementById('translator-output');
 
-textInput.addEventListener('input', function (event) {
+inputTextarea.addEventListener('input', function (event) {
     const textarea = event.target;
 
     textarea.style.height = 'auto';  // Сброс высоты под текст
@@ -107,9 +143,6 @@ textInput.addEventListener('input', function (event) {
 // Translation
 const RAPID_API_KEY = 'e42deb1a7amsh39fe1a63df9f61cp192bfbjsn4378f1d52d1e';
 const RAPID_API_HOST = 'simple-translate2.p.rapidapi.com';
-
-const inputTextarea = document.getElementById('translator-input');
-const outputTextarea = document.getElementById('translator-output');
 
 let translationTimer;
 
@@ -153,11 +186,15 @@ const translator = async () => {
     outputTextarea.value = translatedText;
 }
 
-inputTextarea.addEventListener('input', function () {
-    // Сброс
+const startTranslator = (delay) => {
+    // Reset
     clearTimeout(translationTimer);
 
-    outputTextarea.value = '...';
+    outputTextarea.value = '';
 
-    translationTimer = setTimeout(translator, 1500);
+    translationTimer = setTimeout(translator, delay);
+}
+
+inputTextarea.addEventListener('input', function () {
+    startTranslator(1500);
 });
