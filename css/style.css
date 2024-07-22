@@ -227,3 +227,33 @@ main {
 .translator-fields .translator-output:hover {
     border: 1px solid var(--var-active-texarea-bd);
 }
+
+/* История переводов */
+.history {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: auto;
+}
+
+.history-show {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.history-show-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--var-header-bd);
+    border-radius: 50%;
+    background-color: var(--var-header-bg);
+}
+
+.history-show-button img {
+    width: 32px;
+    height: 32px;
+}
+

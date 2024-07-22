@@ -167,6 +167,8 @@ const getTranslation = async (text) => {
         const response = await fetch(url, options);
         const result = await response.json();
 
+        console.log(result['data']['targetText']);
+
         return result['data']['targetText'];
     } catch (error) {
         return 'Error...';
@@ -184,6 +186,9 @@ const translator = async () => {
     addHistory(text, translatedText, inputLanguageCode, outputLanguageCode);
 
     outputTextarea.value = translatedText;
+
+    outputTextarea.style.height = 'auto';
+    outputTextarea.style.height = `${outputTextarea.scrollHeight + 1}` + 'px';
 }
 
 const startTranslator = (delay) => {
