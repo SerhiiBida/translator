@@ -1,30 +1,31 @@
 'use strict'
 
-import {addHistory} from "./history.js";
+import {saveRecord, showRecord} from "./history.js";
 
 // Supported languages
 const languages = {
-    'auto': 'Не знаю',
-    'en': 'Англійська',
-    'ar': 'Арабська',
-    'bn': 'Бенгальська',
-    'vi': `В'єтнамська`,
-    'nl': 'Голландська',
-    'el': 'Грецька',
-    'da': 'Данська',
-    'es': 'Іспанська',
-    'it': 'Італійська',
-    'zh': 'Китайська',
-    'ko': 'Корейська',
-    'de': 'Німецька',
-    'no': 'Норвезька',
-    'pt': 'Португальська',
-    'ru': 'Російська',
-    'sw': 'Суахілі',
-    'tr': 'Турецька',
-    'fi': 'Фінська',
-    'fr': 'Французька',
-    'ja': 'Японська'
+    'auto': 'Auto',
+    'en': 'English',
+    'ar': 'Arabic',
+    'bn': 'Bengali',
+    'vi': 'Vietnamese',
+    'nl': 'Dutch',
+    'el': 'Greek',
+    'da': 'Danish',
+    'es': 'Spanish',
+    'it': 'Italian',
+    'zh': 'Chinese',
+    'ko': 'Korean',
+    'de': 'German',
+    'no': 'Norwegian',
+    'pt': 'Portuguese',
+    'ru': 'Russian',
+    'sw': 'Swahili',
+    'tr': 'Turkish',
+    'uk': 'Ukrainian',
+    'fi': 'Finnish',
+    'fr': 'French',
+    'ja': 'Japanese'
 };
 
 let inputLanguageCode = 'en';
@@ -183,7 +184,9 @@ const translator = async () => {
     }
     const translatedText = await getTranslation(text);
 
-    addHistory(text, translatedText, inputLanguageCode, outputLanguageCode);
+    saveRecord(text, translatedText, languages[inputLanguageCode], languages[outputLanguageCode]);
+
+    showRecord();
 
     outputTextarea.value = translatedText;
 

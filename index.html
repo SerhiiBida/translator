@@ -48,7 +48,7 @@
             <div class="translator-fields">
                 <div class="translator-input">
                     <textarea name="translator-input" id="translator-input"
-                              placeholder="Текст для перекладу"></textarea>
+                              placeholder="Text to translate"></textarea>
                     <div class="translator-input-info">
                     </div>
                 </div>
@@ -61,21 +61,40 @@
     <section class="history">
         <div class="history-show">
             <button class="history-show-button">
-                <img src="img/history_32x32.png" alt="history">
+                <img src="img/history_64x64.png" alt="history">
             </button>
+        </div>
+        <div class="history-wrapper">
+            <div class="history-header">
+                <div class="history-header-characters-per-day">
+                    <p>
+                        Translated in a day:
+                    </p>
+                    <p>
+                        125 chars
+                    </p>
+                </div>
+                <button class="history-delete-all-button">
+                    Clear history
+                </button>
+            </div>
+            <div class="history-records">
+            </div>
         </div>
     </section>
 </main>
-<footer>
-    <p>
-        Сайт использует Cookie
-    </p>
-    <p>
-        Icons
-        <a href="https://www.flaticon.com/">
-            flaticon.com
-        </a>
-    </p>
+<footer class="footer">
+    <div class="footer-wrapper">
+        <p>
+            The site uses Cookies
+        </p>
+        <p>
+            Icons
+            <a href="https://www.flaticon.com/" target="_blank">
+                flaticon.com
+            </a>
+        </p>
+    </div>
 </footer>
 <script src="js/main.js"></script>
 <script src="js/history.js" type="module"></script>

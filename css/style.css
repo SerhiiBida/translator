@@ -6,6 +6,7 @@
     --var-translator-fc: #222c31;
     --var-active-button: #f7f9f9;
     --var-active-texarea-bd: #d9497e;
+    --var--history-header-fc: #5d5b5b;
 }
 
 .dark {
@@ -116,7 +117,6 @@ h6 {
     align-items: center;
     margin: 0 auto;
     max-width: 1280px;
-    width: auto;
     padding: 10px 10px;
 }
 
@@ -166,7 +166,6 @@ main {
 .translator {
     margin: 0 auto;
     max-width: 1280px;
-    width: auto;
 }
 
 .translator-selection {
@@ -230,15 +229,14 @@ main {
 
 /* История переводов */
 .history {
-    margin: 0 auto;
-    max-width: 1280px;
+    margin: 20px auto;
+    max-width: 900px;
     width: auto;
 }
 
 .history-show {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
 }
 
 .history-show-button {
@@ -252,8 +250,119 @@ main {
     background-color: var(--var-header-bg);
 }
 
+.history-show-button:hover {
+    background-color: var(--var-active-button);
+}
+
 .history-show-button img {
     width: 32px;
     height: 32px;
+}
+
+.history-wrapper {
+    display: none;
+    margin-top: 10px;
+    border-radius: 12px;
+    border: 1px solid var(--var-header-bd);
+    background-color: var(--var-header-bg);
+}
+
+.show {
+    display: block;
+    transform: translateY(150%);
+    animation: move-up 0.8s forwards;
+}
+
+@keyframes move-up {
+    0% {
+        transform: translateY(150%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--var-header-bd);
+}
+
+.history-header-characters-per-day p {
+    color: #e10455;
+    font-weight: 700;
+}
+
+.history-delete-all-button {
+    padding: 4px 5px;
+    color: var(--var-header-bg);
+    border-radius: 12px;
+    background-color: #e10455;
+}
+
+.history-records {
+    display: flex;
+    flex-direction: column;
+}
+
+.history-record {
+    border-bottom: 1px solid var(--var-header-bd);
+}
+
+.history-record-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px 0 10px;
+}
+
+.history-record-header p {
+    color: var(--var--history-header-fc);
+    font-size: 12px;
+}
+
+.history-record-delete-button {
+    background-color: var(--var-header-bg);
+}
+
+.history-record-delete-button img {
+    width: 18px;
+    height: 18px;
+}
+
+.history-record-body {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 5px 10px;
+}
+
+.history-record-output-text {
+    color: var(--var--history-header-fc);
+}
+
+
+/* Подвал */
+.footer {
+    background-color: #f3c61e;
+}
+
+.footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 5px 10px;
+}
+
+.footer-wrapper p {
+    color: #e10455;
+    font-weight: 500;
+}
+
+.footer-wrapper a {
+    text-decoration: underline;
 }
 
