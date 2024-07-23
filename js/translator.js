@@ -1,6 +1,6 @@
 'use strict'
 
-import {saveRecord, showRecord} from "./history.js";
+import {saveRecord, showRecord, saveAmountCharacters} from "./history.js";
 
 // Supported languages
 const languages = {
@@ -141,6 +141,16 @@ inputTextarea.addEventListener('input', function (event) {
 });
 
 
+// Amount characters in inputTextarea
+const amountCharactersBlock = document.querySelector('.translator-input-info p');
+
+inputTextarea.addEventListener('input', function () {
+    const amountCharacters = inputTextarea.value.length;
+
+    amountCharactersBlock.textContent = `${amountCharacters} / 2000`;
+});
+
+
 // Translation
 const RAPID_API_KEY = 'e42deb1a7amsh39fe1a63df9f61cp192bfbjsn4378f1d52d1e';
 const RAPID_API_HOST = 'simple-translate2.p.rapidapi.com';
@@ -168,8 +178,6 @@ const getTranslation = async (text) => {
         const response = await fetch(url, options);
         const result = await response.json();
 
-        console.log(result['data']['targetText']);
-
         return result['data']['targetText'];
     } catch (error) {
         return 'Error...';
@@ -177,16 +185,22 @@ const getTranslation = async (text) => {
 }
 
 const translator = async () => {
+    if (inputTextarea.value.length > 2000) {
+        return;
+    }
+
     const text = inputTextarea.value.trim();
 
     if (!text) {
         return;
     }
+
     const translatedText = await getTranslation(text);
 
     saveRecord(text, translatedText, languages[inputLanguageCode], languages[outputLanguageCode]);
-
     showRecord();
+
+    saveAmountCharacters(inputTextarea.value.length);
 
     outputTextarea.value = translatedText;
 
@@ -199,6 +213,9 @@ const startTranslator = (delay) => {
     clearTimeout(translationTimer);
 
     outputTextarea.value = '';
+
+    outputTextarea.style.height = 'auto';
+    outputTextarea.style.height = `${outputTextarea.scrollHeight + 1}` + 'px';
 
     translationTimer = setTimeout(translator, delay);
 }

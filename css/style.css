@@ -220,11 +220,31 @@ main {
     padding: 10px 15px;
     font-size: 24px;
     color: var(--var-translator-fc);
+    background-color: var(--var-header-bg);
 }
 
 .translator-fields .translator-input:hover,
 .translator-fields .translator-output:hover {
     border: 1px solid var(--var-active-texarea-bd);
+}
+
+.translator-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    background-color: var(--var-header-bg);
+}
+
+.translator-input-info {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    flex: 1;
+    padding: 0 5px 5px 0;
+}
+
+.translator-output {
+    background-color: var(--var-header-bg);
 }
 
 /* История переводов */
@@ -336,6 +356,11 @@ main {
     flex-direction: column;
     gap: 7px;
     padding: 5px 10px;
+}
+
+.history-record-input-text,
+.history-record-output-text {
+    word-wrap: break-word;
 }
 
 .history-record-output-text {

@@ -1,5 +1,8 @@
 'use strict'
 
+import {deleteCookie, getCookie, setCookie} from "./cookies.js";
+
+
 // Show history
 const showRecordsButton = document.querySelector('.history-show-button');
 const historyBlock = document.querySelector('.history-wrapper');
@@ -68,6 +71,26 @@ const showRecords = () => {
 
 showRecordsButton.addEventListener('click', showRecords);
 
+// deleteCookie('amountCharactersPerDay')
+// deleteCookie('amountCharactersPerDayEndDate')
+
+// Show amount of translated characters
+const amountCharactersPerDayBlock = document.querySelector('.history-header-characters-per-day > p:last-child');
+
+showRecordsButton.addEventListener('click', function () {
+    if (!historyBlock.classList.contains('show')) {
+        return;
+    }
+
+    const amountCharacters = getCookie('amountCharactersPerDay');
+
+    if (amountCharacters) {
+        amountCharactersPerDayBlock.textContent = amountCharacters + ' chars';
+    } else {
+        amountCharactersPerDayBlock.textContent = '0 chars';
+    }
+});
+
 
 // Delete selected record
 const deleteRecord = (event) => {
@@ -128,4 +151,26 @@ export const showRecord = () => {
     if (records.length) {
         loadRecordsToPage(records, records.length - 1);
     }
+}
+
+// Save amount of translated characters
+export const saveAmountCharacters = (amountCharacters) => {
+    const amountCharactersPerDay = getCookie('amountCharactersPerDay');
+
+    if (!amountCharactersPerDay) {
+        const nowDate = new Date();
+        const endDate = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate() + 1, -nowDate.getTimezoneOffset() / 60);
+
+        setCookie('amountCharactersPerDay', `${amountCharacters}`, {expires: endDate});
+        setCookie('amountCharactersPerDayEndDate', `${endDate.toUTCString()}`, {expires: endDate});
+        return;
+    }
+
+    let endDate = getCookie('amountCharactersPerDayEndDate');
+
+    if (!endDate) {
+        return;
+    }
+
+    setCookie('amountCharactersPerDay', `${+amountCharactersPerDay + amountCharacters}`, {expires: endDate});
 }

@@ -39,6 +39,7 @@
     }
 
     .translator-input {
+        margin: 0;
         border-bottom-left-radius: 12px;
         border-right: 1px solid var(--var-header-bd);
     }
