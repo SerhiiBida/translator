@@ -47,4 +47,13 @@
     .translator-output {
         border-bottom-right-radius: 12px;
     }
+
+    /* История */
+    .history-record-header p:first-child {
+        font-size: 13px;
+    }
+
+    .history-record-header p:last-child {
+        font-size: 14px;
+    }
 }
