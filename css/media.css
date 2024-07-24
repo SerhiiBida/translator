@@ -17,7 +17,8 @@
 @media (min-width: 720px) {
     /* Форма переводчика */
     .translator-wrapper {
-        margin-top: 25px;
+        margin: 23px auto 0 auto;
+        max-width: 700px;
     }
 
     .translator-selection {
@@ -49,11 +50,47 @@
     }
 
     /* История */
+    .history-wrapper {
+        margin: 12px auto;
+        max-width: 600px;
+    }
+
     .history-record-header p:first-child {
         font-size: 13px;
     }
 
     .history-record-header p:last-child {
         font-size: 14px;
+    }
+}
+
+@media (min-width: 850px) {
+    /* Форма переводчика */
+    .translator-wrapper {
+        max-width: 800px;
+    }
+
+    /* История */
+    .history-wrapper {
+        max-width: 700px;
+    }
+}
+
+@media (min-width: 1080px) {
+    /* Форма переводчика */
+    .translator-wrapper {
+        max-width: 900px;
+    }
+
+    /* История */
+    .history-wrapper {
+        max-width: 800px;
+    }
+}
+
+@media (min-width: 1280px) {
+    /* Форма переводчика */
+    .translator-wrapper {
+        max-width: 1200px;
     }
 }
