@@ -71,26 +71,6 @@ const showRecords = () => {
 
 showRecordsButton.addEventListener('click', showRecords);
 
-// deleteCookie('amountCharactersPerDay')
-// deleteCookie('amountCharactersPerDayEndDate')
-
-// Show amount of translated characters
-const amountCharactersPerDayBlock = document.querySelector('.history-header-characters-per-day > p:last-child');
-
-showRecordsButton.addEventListener('click', function () {
-    if (!historyBlock.classList.contains('show')) {
-        return;
-    }
-
-    const amountCharacters = getCookie('amountCharactersPerDay');
-
-    if (amountCharacters) {
-        amountCharactersPerDayBlock.textContent = amountCharacters + ' chars';
-    } else {
-        amountCharactersPerDayBlock.textContent = '0 chars';
-    }
-});
-
 
 // Delete selected record
 const deleteRecord = (event) => {
@@ -174,3 +154,23 @@ export const saveAmountCharacters = (amountCharacters) => {
 
     setCookie('amountCharactersPerDay', `${+amountCharactersPerDay + amountCharacters}`, {expires: endDate});
 }
+
+
+// Show amount of translated characters
+const amountCharactersPerDayBlock = document.querySelector('.history-header-characters-per-day > p:last-child');
+
+export const showAmountCharactersPerDay = () => {
+    if (!historyBlock.classList.contains('show')) {
+        return;
+    }
+
+    const amountCharacters = getCookie('amountCharactersPerDay');
+
+    if (amountCharacters) {
+        amountCharactersPerDayBlock.textContent = amountCharacters + ' chars';
+    } else {
+        amountCharactersPerDayBlock.textContent = '0 chars';
+    }
+}
+
+showRecordsButton.addEventListener('click', showAmountCharactersPerDay);

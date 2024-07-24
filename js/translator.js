@@ -1,6 +1,6 @@
 'use strict'
 
-import {saveRecord, showRecord, saveAmountCharacters} from "./history.js";
+import {saveRecord, showRecord, saveAmountCharacters, showAmountCharactersPerDay} from "./history.js";
 
 // Supported languages
 const languages = {
@@ -201,6 +201,7 @@ const translator = async () => {
     showRecord();
 
     saveAmountCharacters(inputTextarea.value.length);
+    showAmountCharactersPerDay();
 
     outputTextarea.value = translatedText;
 
