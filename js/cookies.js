@@ -1,6 +1,7 @@
 'use strict'
 
 export const getCookie = (name) => {
+    // Поиск значения по ключу(key=value)
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));

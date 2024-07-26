@@ -139,7 +139,12 @@ export const saveAmountCharacters = (amountCharacters) => {
 
     if (!amountCharactersPerDay) {
         const nowDate = new Date();
-        const endDate = new Date(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate() + 1, -nowDate.getTimezoneOffset() / 60);
+        const endDate = new Date(
+            nowDate.getFullYear(),
+            nowDate.getMonth(),
+            nowDate.getDate() + 1,
+            -nowDate.getTimezoneOffset() / 60
+        );
 
         setCookie('amountCharactersPerDay', `${amountCharacters}`, {expires: endDate});
         setCookie('amountCharactersPerDayEndDate', `${endDate.toUTCString()}`, {expires: endDate});

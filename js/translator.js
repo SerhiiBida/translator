@@ -36,7 +36,7 @@ let outputLanguageCode = 'ja';
 const inputLanguagesList = document.querySelector('.selection-input-language-list');
 const outputLanguagesList = document.querySelector('.selection-output-language-list');
 
-const creatingListItems = (list, activeLanguageCode, isOutputLanguagesList = false) => {
+const createListItems = (list, activeLanguageCode, isOutputLanguagesList = false) => {
     for (let languageCode in languages) {
         if (isOutputLanguagesList && languageCode === 'auto') {
             continue;
@@ -56,8 +56,8 @@ const creatingListItems = (list, activeLanguageCode, isOutputLanguagesList = fal
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    creatingListItems(inputLanguagesList, inputLanguageCode);
-    creatingListItems(outputLanguagesList, outputLanguageCode, true);
+    createListItems(inputLanguagesList, inputLanguageCode);
+    createListItems(outputLanguagesList, outputLanguageCode, true);
 });
 
 
@@ -157,6 +157,17 @@ const RAPID_API_HOST = 'simple-translate2.p.rapidapi.com';
 
 let translationTimer;
 
+const getOptions = (method, headers = {}, body) => {
+    return {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+            ...headers
+        },
+        body: JSON.stringify(body)
+    };
+}
+
 const getTranslation = async (text) => {
     const url = `https://simple-translate2.p.rapidapi.com/translate?source_lang=${inputLanguageCode}&target_lang=${outputLanguageCode}`;
 
@@ -164,15 +175,10 @@ const getTranslation = async (text) => {
         sourceText: text
     }
 
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-rapidapi-key': RAPID_API_KEY,
-            'x-rapidapi-host': RAPID_API_HOST,
-        },
-        body: JSON.stringify(sourceText)
-    };
+    const options = getOptions('POST', {
+        'x-rapidapi-key': RAPID_API_KEY,
+        'x-rapidapi-host': RAPID_API_HOST
+    }, sourceText);
 
     try {
         const response = await fetch(url, options);
